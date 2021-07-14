@@ -20,19 +20,26 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarToggle">
-          <div class="navbar-nav mr-auto">
-            <a class="nav-item nav-link" href="/">Home</a>
-            <a class="nav-item nav-link" href="/about_page">About</a>
-          </div>
-        </div>
+         <a class="nav-item nav-link" href="/">Home</a>
+         <a class="nav-item nav-link" href="/about">About</a>
+         <a class="nav-item nav-link" href ="/register">Register</a>
       </div>
     </nav>
   </header>
   <main role="main" class="container">
     <div class="row">
       <div class="col-md-8">
-        <h1>This shows up on every page</h1> {% block content %}{% endblock %}
+        <h1>This shows up on every page</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                 <div class="alert alert-{{ category }}">
+                   {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          {% block content %}{% endblock %}
       </div>
     </div>
   </main>
